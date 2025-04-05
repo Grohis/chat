@@ -17,6 +17,17 @@ public class Server {
         authenticatedProvider = new InMemoryAuthenticatedProvider(this);
     }
 
+    public void sendPrivateMessage(String recipient, String message, ClientHandler sender) {
+        for (ClientHandler client : clients) {
+            if (client.getUsername().equals(recipient)) {
+                client.sendMsg("[ЛС от " + sender.getUsername() + "]: " + message);
+                sender.sendMsg("[Вы -> " + recipient + "]: " + message);
+                return;
+            }
+        }
+        sender.sendMsg("Пользователь " + recipient + " не найден.");
+    }
+
     public void start() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Сервер запущен на порту " + port);

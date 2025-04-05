@@ -76,8 +76,6 @@ public class ClientHandler {
                             sendMsg("Неверный формат команды. Используйте: /w username message");
                             continue;
                         }
-                        // String recipient = elements[1];
-                        // String privatMessage = elements[2];
                         server.sendPrivateMessage(elements[1], elements[2], this);
                         continue;
                     } else {
